@@ -18,7 +18,7 @@ for exploring and managing books. The project follows a <strong>feature-based ar
 <p>The Welcome Screen introduces users to Bookia with a modern and minimal design.</p>
 
 <p align="center">
-  <img src="assets/images/welcome.png" alt="Welcome Screen Preview" width="400">
+  <img src="" alt="Welcome Screen Preview" width="400">
 </p>
 
 <hr>
