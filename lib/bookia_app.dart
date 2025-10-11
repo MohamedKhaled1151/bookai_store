@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bookia/core/theming/app_light_mode.dart';
-import 'package:bookia/features/screens/welcome/presentation/ui/welcome_screen.dart';
+import 'features/welcome/presentation/ui/welcome_screen.dart';
 
 class BookiaApp extends StatelessWidget {
   const BookiaApp({super.key});

@@ -1,5 +1,6 @@
 import 'package:bookia/core/theming/app_colors.dart';
 import 'package:bookia/core/widgets/app_button.dart';
+import 'package:bookia/features/auth/presentation/ui/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bookia/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +32,12 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Spacer(),
               AppButton(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
                 titleButton: "login",
                 backgroundButton: AppColors.mainColor,
               ),

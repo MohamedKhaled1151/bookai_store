@@ -14,11 +14,19 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/back_arrow.png
+  AssetGenImage get backArrow =>
+      const AssetGenImage('assets/images/back_arrow.png');
+
+  /// File path: assets/images/system_design.png
+  AssetGenImage get systemDesign =>
+      const AssetGenImage('assets/images/system_design.png');
+
   /// File path: assets/images/welcome.png
   AssetGenImage get welcome => const AssetGenImage('assets/images/welcome.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [welcome];
+  List<AssetGenImage> get values => [backArrow, systemDesign, welcome];
 }
 
 class $AssetsLogosGen {
@@ -32,11 +40,28 @@ class $AssetsLogosGen {
   List<AssetGenImage> get values => [splashLogo];
 }
 
+class $AssetsSvgiconsGen {
+  const $AssetsSvgiconsGen();
+
+  /// File path: assets/svgicons/apple_ic.svg
+  String get appleIc => 'assets/svgicons/apple_ic.svg';
+
+  /// File path: assets/svgicons/facebook-svgrepo-com.svg
+  String get facebookSvgrepoCom => 'assets/svgicons/facebook-svgrepo-com.svg';
+
+  /// File path: assets/svgicons/google_ic.svg
+  String get googleIc => 'assets/svgicons/google_ic.svg';
+
+  /// List of all assets
+  List<String> get values => [appleIc, facebookSvgrepoCom, googleIc];
+}
+
 class Assets {
   const Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLogosGen logos = $AssetsLogosGen();
+  static const $AssetsSvgiconsGen svgicons = $AssetsSvgiconsGen();
 }
 
 class AssetGenImage {
