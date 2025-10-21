@@ -14,7 +14,7 @@ class AuthWithSocial extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Social(svgIcon: Assets.svgicons.googleIc),
-        Social(svgIcon: Assets.svgicons.facebookSvgrepoCom),
+        Social(svgIcon: Assets.svgicons.facebook1SvgrepoCom),
         Social(svgIcon: Assets.svgicons.appleIc),
       ],
     );
@@ -28,12 +28,12 @@ class Social extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 25.w),
+      padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 20.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: AppColors.borderColor),
       ),
-      child: SvgPicture.asset(svgIcon, width: 10.w),
+      child: SvgPicture.asset(svgIcon, width: 25.w),
     );
   }
 }

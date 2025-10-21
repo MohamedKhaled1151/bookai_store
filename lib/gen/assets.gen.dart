@@ -46,6 +46,10 @@ class $AssetsSvgiconsGen {
   /// File path: assets/svgicons/apple_ic.svg
   String get appleIc => 'assets/svgicons/apple_ic.svg';
 
+  /// File path: assets/svgicons/facebook-1-svgrepo-com.svg
+  String get facebook1SvgrepoCom =>
+      'assets/svgicons/facebook-1-svgrepo-com.svg';
+
   /// File path: assets/svgicons/facebook-svgrepo-com.svg
   String get facebookSvgrepoCom => 'assets/svgicons/facebook-svgrepo-com.svg';
 
@@ -53,7 +57,12 @@ class $AssetsSvgiconsGen {
   String get googleIc => 'assets/svgicons/google_ic.svg';
 
   /// List of all assets
-  List<String> get values => [appleIc, facebookSvgrepoCom, googleIc];
+  List<String> get values => [
+    appleIc,
+    facebook1SvgrepoCom,
+    facebookSvgrepoCom,
+    googleIc,
+  ];
 }
 
 class Assets {
