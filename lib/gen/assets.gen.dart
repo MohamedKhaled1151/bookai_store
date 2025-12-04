@@ -32,12 +32,15 @@ class $AssetsImagesGen {
 class $AssetsLogosGen {
   const $AssetsLogosGen();
 
+  /// File path: assets/logos/logo_app.png
+  AssetGenImage get logoApp => const AssetGenImage('assets/logos/logo_app.png');
+
   /// File path: assets/logos/splash_logo.png
   AssetGenImage get splashLogo =>
       const AssetGenImage('assets/logos/splash_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [splashLogo];
+  List<AssetGenImage> get values => [logoApp, splashLogo];
 }
 
 class $AssetsSvgiconsGen {

@@ -1,43 +1,58 @@
 import 'package:bookia/core/networking/api_constants.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:bookia/core/local/local_constants.dart';
+
+import '../local/local_helper.dart';
 
 class DioHelper {
   static Dio? _dio;
+
   static init() {
-    BaseOptions(
+    BaseOptions options = BaseOptions(
       baseUrl: ApiConstants.baseUrl,
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      connectTimeout: Duration(seconds: 30),
-      receiveTimeout: Duration(seconds: 30),
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
     );
-    Dio dio = Dio();
-    dio.interceptors.add(PrettyDioLogger());
 
-    // customization
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90,
-        enabled: kDebugMode,
-        filter: (options, args) {
-          // don't print requests with uris containing '/posts'
-          if (options.path.contains('/posts')) {
-            return false;
-          }
-          // don't print responses with unit8 list data
-          return !args.isResponse || !args.hasUint8ListData;
-        },
-      ),
-    );
+    _dio = Dio(options);
+    _dio!.interceptors.add(PrettyDioLogger());
+  }
+
+  static Future<Response?> postRequest({
+    required String endPoint,
+
+    Map<String, dynamic>? data,
+    bool? withToken,
+  }) async {
+    print("token:${LocalHelper.getString(LocalConstants.token)}");
+    if (withToken ?? false) {
+      _dio?.options.headers = {
+        "authorization":
+            "Bearer ${LocalHelper.getString(LocalConstants.token)}",
+      };
+    }
+    return await _dio?.post(endPoint, data: data);
+  }
+
+  static Future<Response?> getRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool? withToken,
+  }) async {
+    print("token:${LocalHelper.getString(LocalConstants.token)}");
+
+    if (withToken ?? false) {
+      _dio?.options.headers = {
+        "authorization":
+            "Bearer ${LocalHelper.getString(LocalConstants.token)}",
+      };
+    }
+
+    return await _dio?.get(endPoint, queryParameters: data);
   }
 }

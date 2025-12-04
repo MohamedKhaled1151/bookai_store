@@ -1,6 +1,4 @@
 import 'package:bookia/core/widgets/app_button.dart';
-import 'package:bookia/core/widgets/button_text.dart';
-import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/ui/register/widget/register_password.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';

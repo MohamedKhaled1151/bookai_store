@@ -1,5 +1,7 @@
 import 'package:bookia/core/local/local_constants.dart';
 import 'package:bookia/core/local/local_helper.dart';
+import 'package:bookia/core/networking/api_constants.dart';
+import 'package:bookia/core/networking/dio_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -13,6 +15,31 @@ class AuthRepo {
       },
     ),
   );
+
+  static login({required String email, required String pass}) async {
+    try {
+      final response = await DioHelper.postRequest(
+        endPoint: ApiConstants.login,
+        data: {"email": email, "password": pass},
+      );
+
+      if (response?.statusCode == 200) {
+        debugPrint("user token : ${response?.data["data"]["token"]}");
+        LocalHelper.setString(
+          LocalConstants.token,
+          response?.data["data"]["token"],
+        );
+      } else {
+        debugPrint("Api Error");
+        return null;
+      }
+    } catch (error) {
+      debugPrint("Api Error catch");
+      debugPrint(error.toString());
+      return null;
+    }
+  }
+
   static register({
     required String name,
     required String email,

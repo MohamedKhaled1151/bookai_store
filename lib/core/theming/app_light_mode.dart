@@ -33,4 +33,5 @@ TextTheme lightTextStyle = TextTheme(
 
   displaySmall: TextStyle(fontSize: 18.sp),
   titleSmall: TextStyle(fontSize: 16.sp),
+  titleMedium: TextStyle(fontSize: 24.sp),
 );
