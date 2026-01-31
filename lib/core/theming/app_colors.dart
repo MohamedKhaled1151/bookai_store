@@ -6,4 +6,5 @@ class AppColors {
   static Color grayTextFormFiled = Color(0xff8391A1);
   static Color darkGray = Color(0xff6A707C);
   static Color backgroundItem = Color(0xffF5EFE1);
+  static Color lightGray = Color(0xffE0E0E0);
 }

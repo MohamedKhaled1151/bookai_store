@@ -19,18 +19,17 @@ class BookiaApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppLightMode.theme,
-          home: BottomNavBar(),
+          home: startScreen(),
         );
       },
     );
   }
 }
 
-//   startScreen() {
-//     if (LocalHelper.getString(LocalConstants.token) != null) {
-//       return BottomNavBar();
-//     } else {
-//       return WelcomeScreen();
-//     }
-//   }
-// }
+startScreen() {
+  if (LocalHelper.getString(LocalConstants.token) != null) {
+    return BottomNavBar();
+  } else {
+    return WelcomeScreen();
+  }
+}

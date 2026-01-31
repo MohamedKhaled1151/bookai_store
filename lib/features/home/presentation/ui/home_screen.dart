@@ -43,40 +43,67 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 15.h),
 
-            BlocBuilder<HomeCubit, HomeState>(
-              buildWhen: (prev, current) =>
-                  current is GetBestSellerSuccess ||
-                  current is GetBestSellerLoading ||
-                  current is GetBestSellerError,
-              builder: (context, state) {
-                if (state is GetBestSellerLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is GetBestSellerSuccess) {
-                  return GridView.builder(
-                    padding: EdgeInsets.all(19.r),
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: state.books?.length ?? 0,
-
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: .5,
-                      crossAxisSpacing: 11,
-                      mainAxisSpacing: 11,
-                    ),
-
-                    itemBuilder: (context, index) => BookItems(
-                      books: state.books?[index],
-                      addToCartOnTap: () {
-                        context.read<HomeCubit>().addToCart(
-                          state.books?[index].id ?? 0,
-                        );
-                      },
+            BlocConsumer<HomeCubit, HomeState>(
+              listener: (context, state) {
+                // TODO: implement listener
+                if (state is AddToCartLoadingState) {
+                  showDialog(
+                    context: context,
+                    builder: (context) =>
+                        Center(child: CircularProgressIndicator()),
+                  );
+                } else if (state is AddToCartSuccessState) {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text(
+                        state.massage,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   );
-                } else {
-                  return Text("Error");
                 }
+              },
+              builder: (context, state) {
+                return BlocBuilder<HomeCubit, HomeState>(
+                  buildWhen: (prev, current) =>
+                      current is GetBestSellerSuccess ||
+                      current is GetBestSellerLoading ||
+                      current is GetBestSellerError,
+                  builder: (context, state) {
+                    if (state is GetBestSellerLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state is GetBestSellerSuccess) {
+                      return GridView.builder(
+                        padding: EdgeInsets.all(19.r),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: state.books?.length ?? 0,
+
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: .5,
+                          crossAxisSpacing: 11,
+                          mainAxisSpacing: 11,
+                        ),
+
+                        itemBuilder: (context, index) => BookItems(
+                          books: state.books?[index],
+                          addToCartOnTap: () {
+                            context.read<HomeCubit>().addToCart(
+                              state.books?[index].id ?? 0,
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Text("Error");
+                    }
+                  },
+                );
               },
             ),
           ],
