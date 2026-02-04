@@ -46,13 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocConsumer<HomeCubit, HomeState>(
               listener: (context, state) {
                 // TODO: implement listener
-                if (state is AddToCartLoadingState) {
-                  showDialog(
-                    context: context,
-                    builder: (context) =>
-                        Center(child: CircularProgressIndicator()),
-                  );
-                } else if (state is AddToCartSuccessState) {
+                if (state is AddToCartSuccessState) {
                   if (Navigator.canPop(context)) {
                     Navigator.pop(context);
                   }
@@ -64,6 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
+                  );
+                } else if (state is AddToCartLoadingState) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    useRootNavigator: true,
+                    builder: (_) => Center(child: CircularProgressIndicator()),
                   );
                 }
               },

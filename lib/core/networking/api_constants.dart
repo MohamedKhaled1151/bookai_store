@@ -7,4 +7,6 @@ class ApiConstants {
   static const String bestSeller = "products-bestseller";
   static const String addToCart = "add-to-cart";
   static const String cart = "cart";
+  static const String removeFromCart = "remove-from-cart";
+  static const String updateCart = "update-cart";
 }

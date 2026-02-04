@@ -2,6 +2,7 @@ import 'package:bookia/core/theming/app_colors.dart';
 import 'package:bookia/core/widgets/app_button.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/ui/login/widget/password_filed.dart';
+import 'package:bookia/features/bottom_nav_bar/presentation/bottom_nav_bar.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ class _LoginFormState extends State<LoginForm> {
         } else if (state is LoginSuccessState) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => BottomNavBar()),
             (e) => false,
           );
         } else if (state is LoginErrorState) {

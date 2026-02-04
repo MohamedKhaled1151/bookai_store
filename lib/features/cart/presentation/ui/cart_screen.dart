@@ -1,5 +1,6 @@
 import 'package:bookia/core/widgets/app_button.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:bookia/features/make_order/presentation/ui/make_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,8 +31,28 @@ class CartScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.separated(
-                      itemBuilder: (context, index) =>
-                          CartItem(item: state.books[index]),
+                      itemBuilder: (context, index) => CartItem(
+                        item: state.books[index],
+                        onTap: () {
+                          context.read<CartCubit>().removeFromCart(
+                            state.books[index].itemId.toString(),
+                          );
+                        },
+                        incrrednTap: () {
+                          context.read<CartCubit>().updateCart(
+                            state.books[index].itemId ?? 0,
+                            (state.books[index].itemQuantity! + 1),
+                          );
+                        },
+                        decrresonTap: () {
+                          if (state.books[index].itemQuantity! > 0) {
+                            context.read<CartCubit>().updateCart(
+                              state.books[index].itemId ?? 0,
+                              state.books[index].itemQuantity! - 1,
+                            );
+                          }
+                        },
+                      ),
                       separatorBuilder: (context, index) =>
                           Divider(color: AppColors.lightGray),
                       itemCount: state.books.length,
@@ -52,6 +73,14 @@ class CartScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   AppButton(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MakeOrderScreen(),
+                        ),
+                      );
+                    },
                     titleButton: "Checkout",
                     backgroundButton: AppColors.mainColor,
                   ),
@@ -69,7 +98,16 @@ class CartScreen extends StatelessWidget {
 
 class CartItem extends StatelessWidget {
   final CartItems item;
-  const CartItem({super.key, required this.item});
+  final void Function()? onTap;
+  final void Function()? incrrednTap;
+  final void Function()? decrresonTap;
+  const CartItem({
+    super.key,
+    required this.item,
+    this.onTap,
+    this.incrrednTap,
+    this.decrresonTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,34 +141,40 @@ class CartItem extends StatelessWidget {
               SizedBox(height: 25.h),
               Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(8.r),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGray,
+                  InkWell(
+                    onTap: incrrednTap,
+                    child: Container(
+                      padding: EdgeInsets.all(8.r),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightGray,
 
-                      borderRadius: BorderRadius.circular(6.r),
+                        borderRadius: BorderRadius.circular(6.r),
+                      ),
+                      child: Icon(Icons.add),
                     ),
-                    child: Icon(Icons.add),
                   ),
                   SizedBox(width: 15.w),
 
                   Text(item.itemQuantity.toString() ?? "0"),
                   SizedBox(width: 15.w),
-                  Container(
-                    padding: EdgeInsets.all(8.r),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGray,
+                  InkWell(
+                    onTap: decrresonTap,
+                    child: Container(
+                      padding: EdgeInsets.all(8.r),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightGray,
 
-                      borderRadius: BorderRadius.circular(6.r),
+                        borderRadius: BorderRadius.circular(6.r),
+                      ),
+                      child: Icon(Icons.remove, size: 15),
                     ),
-                    child: Icon(Icons.remove),
                   ),
                 ],
               ),
             ],
           ),
         ),
-        Icon(Icons.close),
+        InkWell(onTap: onTap, child: Icon(Icons.close)),
       ],
     );
   }

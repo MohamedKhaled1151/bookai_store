@@ -29,6 +29,7 @@ class AuthRepo {
           LocalConstants.token,
           response?.data["data"]["token"],
         );
+        return response;
       } else {
         debugPrint("Api Error");
         return null;
